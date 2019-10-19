@@ -1,0 +1,53 @@
+
+Akhils-MBP:~ akhilperimbeti$ cd Desktop
+Akhils-MBP:Desktop akhilperimbeti$ cd workout1
+Akhils-MBP:workout1 akhilperimbeti$ cd data
+ 
+Akhils-MBP:data akhilperimbeti$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2010.ibtracs_all.v03r10.csv
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4048k  100 4048k    0     0   841k      0  0:00:04  0:00:04 --:--:--  861k
+Akhils-MBP:data akhilperimbeti$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2011.ibtracs_all.v03r10.csv
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4714k  100 4714k    0     0   508k      0  0:00:09  0:00:09 --:--:--  754k
+Akhils-MBP:data akhilperimbeti$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2012.ibtracs_all.v03r10.csv
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4798k  100 4798k    0     0   637k      0  0:00:07  0:00:07 --:--:-- 1070k
+Akhils-MBP:data akhilperimbeti$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2013.ibtracs_all.v03r10.csv
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4789k  100 4789k    0     0   676k      0  0:00:07  0:00:07 --:--:-- 1039k
+Akhils-MBP:data akhilperimbeti$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2014.ibtracs_all.v03r10.csv
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 5133k  100 5133k    0     0   669k      0  0:00:07  0:00:07 --:--:-- 1004k
+Akhils-MBP:data akhilperimbeti$ curl -O ftp://eclipse.ncdc.noaa.gov/pub/ibtracs/v03r10/all/csv/year/Year.2015.ibtracs_all.v03r10.csv
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 5528k  100 5528k    0     0   678k      0  0:00:08  0:00:08 --:--:-- 1066k
+
+Akhils-MBP:data akhilperimbeti$ cut -f 1-12 -d "," Year.2010.ibtracs_all.v03r10.csv | head -n +2 >> tmp.csv
+Akhils-MBP:data akhilperimbeti$ tail -n +2 tmp.csv > ibtracs-2010-2015.csv
+Akhils-MBP:data akhilperimbeti$ cut -f 1-12 -d "," Year.2010.ibtracs_all.v03r10.csv| tail -n +4 >> ibtracs-2010-2015.csv
+Akhils-MBP:data akhilperimbeti$ cut -f 1-12 -d "," Year.2011.ibtracs_all.v03r10.csv| tail -n +4 >> ibtracs-2010-2015.csv
+Akhils-MBP:data akhilperimbeti$ cut -f 1-12 -d "," Year.2012.ibtracs_all.v03r10.csv| tail -n +4 >> ibtracs-2010-2015.csv
+Akhils-MBP:data akhilperimbeti$ cut -f 1-12 -d "," Year.2013.ibtracs_all.v03r10.csv| tail -n +4 >> ibtracs-2010-2015.csv
+Akhils-MBP:data akhilperimbeti$ cut -f 1-12 -d "," Year.2014.ibtracs_all.v03r10.csv| tail -n +4 >> ibtracs-2010-2015.csv
+Akhils-MBP:data akhilperimbeti$ cut -f 1-12 -d "," Year.2015.ibtracs_all.v03r10.csv| tail -n +4 >> ibtracs-2010-2015.csv
+Akhils-MBP:data akhilperimbeti$ cut -f 1 -d "," ibtracs-2010-2015.csv > serial-numbers.txt 
+ 
+Akhils-MBP:data akhilperimbeti$ mv serial-numbers.txt ../output/
+Akhils-MBP:data akhilperimbeti$ grep "2010" ibtracs-2010-2015.csv | wc -l >records-per-year.txt
+Akhils-MBP:data akhilperimbeti$ grep "2011" ibtracs-2010-2015.csv | wc -l >> records-per-year.txt
+Akhils-MBP:data akhilperimbeti$ grep "2012" ibtracs-2010-2015.csv | wc -l >> records-per-year.txt
+Akhils-MBP:data akhilperimbeti$ grep "2013" ibtracs-2010-2015.csv | wc -l >> records-per-year.txt
+Akhils-MBP:data akhilperimbeti$ grep "2014" ibtracs-2010-2015.csv | wc -l >> records-per-year.txt
+Akhils-MBP:data akhilperimbeti$ grep "2015" ibtracs-2010-2015.csv | wc -l >> records-per-year.txt
+Akhils-MBP:data akhilperimbeti$ mv records-per-year.txt ../output/
+Akhils-MBP:data akhilperimbeti$ cut -f 4 -d "," ibtracs-2010-2015.csv |tail -n +2 | sort | uniq -c >> basin-frequencies.txt
+Akhils-MBP:data akhilperimbeti$  mv basin-frequencies.txt ../output/
+Akhils-MBP:data akhilperimbeti$ cut -f 5 -d "," ibtracs-2010-2015.csv |tail -n +2 | sort | uniq -c >> sub-basin-frequencies.txt
+Akhils-MBP:data akhilperimbeti$ mv sub-basin-frequencies.txt ../output/
+
